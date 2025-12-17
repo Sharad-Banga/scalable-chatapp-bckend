@@ -3,9 +3,6 @@ import { createWebSocket } from './ws/websocket.js';
 
 const server = http.createServer();
 
-// console.log(server);
-
-
 createWebSocket(server);
 
 server.listen(3000,()=>{

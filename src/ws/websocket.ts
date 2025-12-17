@@ -6,36 +6,88 @@ export function createWebSocket(server:any){
 
   const ws = new WebSocketServer({server});
 
-  ws.on('connection',function(socket){
+  ws.on('connection',(socket)=>{
 
-    socket.on('message',async function(message){
-      const parsedData = JSON.parse(message.toString());
+    socket.on('message',(message)=>{
 
-      if(parsedData.type == "join-room"){
+      const parsedMessage = JSON.parse(message.toString());
 
-        roomManager.join(parsedData.roomId , socket);
-        pubsubManager.subscribe(parsedData.roomId);
+      if(parsedMessage.type=="join_room"){
 
-        pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
-          for (const ws of roomManager.getMembers(parsedData.roomId)) {
-            if (ws.readyState === WebSocket.OPEN) {
-              ws.send(JSON.stringify(payload));
-            }
-          }
-        });
+        
+
+
+
+      }
+
+      if(parsedMessage.type=="chat"){
+
+
+          
+
       }
 
 
-      if(parsedData.type == "chat"){
-        await pubsubManager.publish(parsedData.roomId, {
-          type: "chat",
-          roomId: parsedData.roomId,
-          message: parsedData.message,
-          ts: Date.now()
-        });
-      }
     })
-    
+
   })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // ws.on('connection',function(socket){
+
+  //   socket.on('message',async function(message){
+  //     const parsedData = JSON.parse(message.toString());
+
+  //     if(parsedData.type == "join-room"){
+
+  //       roomManager.join(parsedData.roomId , socket);
+  //       pubsubManager.subscribe(parsedData.roomId);
+
+  //       pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
+  //         for (const ws of roomManager.getMembers(parsedData.roomId)) {
+  //           if (ws.readyState === WebSocket.OPEN) {
+  //             ws.send(JSON.stringify(payload));
+  //           }
+  //         }
+  //       });
+  //     }
+
+
+  //     if(parsedData.type == "chat"){
+  //       await pubsubManager.publish(parsedData.roomId, {
+  //         type: "chat",
+  //         roomId: parsedData.roomId,
+  //         message: parsedData.message,
+  //         ts: Date.now()
+  //       });
+  //     }
+  //   })
+    
+  // })
   
 }
