@@ -1,1 +1,1 @@
-{"version":3,"file":"RoomManager.d.ts","sourceRoot":"","sources":["../../src/core/RoomManager.ts"],"names":[],"mappings":""}
+{"version":3,"file":"RoomManager.d.ts","sourceRoot":"","sources":["../../src/core/RoomManager.ts"],"names":[],"mappings":"AAAA,cAAM,WAAW;IAIf,OAAO,CAAC,MAAM,CAAC,QAAQ,CAAc;IACrC,OAAO,CAAC,KAAK,CAAmB;;WAKlB,WAAW,IAAI,WAAW;IAOjC,IAAI,CAAC,MAAM,EAAE,MAAM,EAAE,MAAM,EAAE,GAAG,GAAG,IAAI;IAOvC,KAAK,CAAC,MAAM,EAAE,MAAM,EAAE,MAAM,EAAE,GAAG,GAAG,IAAI;IAS/C,UAAU,CAAC,MAAM,EAAC,MAAM;IAIxB,OAAO,CAAC,MAAM,EAAC,MAAM;CAItB;AAED,eAAO,MAAM,WAAW,aAA4B,CAAC"}

@@ -31,6 +31,13 @@ class RoomManager{
     }
   }
 
+  getMembers(roomId:string) {
+    return this.rooms.get(roomId) ?? new Set();
+  }
+
+  getSize(roomId:string){
+    return this.rooms.get(roomId).size();
+  }
   
 }
 
