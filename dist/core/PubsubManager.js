@@ -6,8 +6,8 @@ class PubSubManager extends EventEmitter {
     sub;
     constructor() {
         super();
-        this.pub = createClient({ url: "redis://localhost:6379" });
-        this.sub = createClient({ url: "redis://localhost:6379" });
+        this.pub = createClient({ url: "redis://127.0.0.1:6379" });
+        this.sub = createClient({ url: "redis://127.0.0.1:6379" });
         this.pub.connect();
         this.sub.connect();
         this.sub.on('message', (channel, message) => {

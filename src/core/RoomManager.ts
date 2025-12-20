@@ -1,9 +1,8 @@
 class RoomManager{
 
-
-
   private static instance: RoomManager;
   private rooms: Map<string, any>;
+  
   constructor(){
     this.rooms = new Map();
   }
@@ -36,7 +35,7 @@ class RoomManager{
   }
 
   getSize(roomId:string){
-    return this.rooms.get(roomId).size();
+     return this.rooms.get(roomId)?.size ?? 0;
   }
   
 }

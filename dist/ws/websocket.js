@@ -8,14 +8,16 @@ export function createWebSocket(server) {
             const parsedData = JSON.parse(message.toString());
             if (parsedData.type == "join-room") {
                 roomManager.join(parsedData.roomId, socket);
-                pubsubManager.subscribe(parsedData.roomId);
-                pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
-                    for (const ws of roomManager.getMembers(parsedData.roomId)) {
-                        if (ws.readyState === WebSocket.OPEN) {
-                            ws.send(JSON.stringify(payload));
+                if (roomManager.getSize(parsedData.roomId) == 1) {
+                    pubsubManager.subscribe(parsedData.roomId);
+                    pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
+                        for (const ws of roomManager.getMembers(parsedData.roomId)) {
+                            if (ws.readyState === WebSocket.OPEN) {
+                                ws.send(JSON.stringify(payload));
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
             if (parsedData.type == "chat") {
                 await pubsubManager.publish(parsedData.roomId, {

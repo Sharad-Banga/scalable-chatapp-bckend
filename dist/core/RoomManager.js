@@ -28,7 +28,7 @@ class RoomManager {
         return this.rooms.get(roomId) ?? new Set();
     }
     getSize(roomId) {
-        return this.rooms.get(roomId).size();
+        return this.rooms.get(roomId)?.size ?? 0;
     }
 }
 export const roomManager = RoomManager.getInstance();

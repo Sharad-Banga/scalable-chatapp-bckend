@@ -6,9 +6,6 @@ export function createWebSocket(server:any){
 
   const ws = new WebSocketServer({server});
 
-
-
-
   ws.on('connection',function(socket){
 
     socket.on('message',async function(message){
@@ -17,17 +14,20 @@ export function createWebSocket(server:any){
       if(parsedData.type == "join-room"){
 
         roomManager.join(parsedData.roomId , socket);
+
+        if(roomManager.getSize(parsedData.roomId) == 1){
+
         pubsubManager.subscribe(parsedData.roomId);
 
-        pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
-          for (const ws of roomManager.getMembers(parsedData.roomId)) {
-            if (ws.readyState === WebSocket.OPEN) {
-              ws.send(JSON.stringify(payload));
+          pubsubManager.on(`room:${parsedData.roomId}`, (payload) => {
+            for (const ws of roomManager.getMembers(parsedData.roomId)) {
+              if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(payload));
+              }
             }
-          }
-        });
+          });
+        }
       }
-
 
       if(parsedData.type == "chat"){
         await pubsubManager.publish(parsedData.roomId, {
