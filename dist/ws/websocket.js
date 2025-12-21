@@ -24,6 +24,7 @@ export function createWebSocket(server) {
                     type: "chat",
                     roomId: parsedData.roomId,
                     message: parsedData.message,
+                    name: parsedData.name,
                     ts: Date.now()
                 });
             }
